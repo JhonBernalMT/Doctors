@@ -1,0 +1,39 @@
+package com.doctors.repository;
+
+import com.doctors.model.DoctorModel;
+import com.doctors.repository.crudrepository.DoctorCrudRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public class DoctorRepository {
+
+    @Autowired          //Inyeccion de dependencias
+    private DoctorCrudRepository doctorCrudRepository;  //1 es la clase, 2 es el nombre(Instancia) de la variable osea el llamado
+
+
+    public List<DoctorModel> getAllDoctors() {
+        return (List<DoctorModel>) doctorCrudRepository.findAll();
+    }
+
+    public Optional<DoctorModel> getDoctor(Integer id) {
+        return doctorCrudRepository.findById(id);
+    }
+
+    public DoctorModel saveDoctor(DoctorModel doctorModel) {
+        return doctorCrudRepository.save(doctorModel);
+    }
+
+    public boolean deleteDoctor(Integer id) {
+        doctorCrudRepository.deleteById(id);
+        return true;
+    }
+
+    public DoctorModel updateDoctor(DoctorModel doctorModel) {
+        return doctorCrudRepository.save(doctorModel);
+    }
+
+}
